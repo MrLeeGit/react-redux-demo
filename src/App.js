@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as userinfoActions from './action/userInfo';
+import { login } from './action/userInfo';
 
 import A from './layout/A';
 import B from './layout/B';
@@ -14,29 +13,25 @@ class App extends React.Component {
       <React.Fragment>
         <A userinfo={ this.props.userinfo } />
         <B userinfo={ this.props.userinfo }/>
-        <C actions={ this.props.userinfoActions } />
+        <C login={ this.props.login } />
       </React.Fragment>
     );
   }
   componentDidMount() {
-    this.props.userinfoActions.login({
+    this.props.login({
       userid: '京A',
       city: 'beijing'
     })
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userinfo: state.userinfo
-  }
-}
+const mapStateToProps = (state) => ({
+  userinfo: state.userinfo
+})
 
-function mapDispatchToProps(dispatch) {
-  return {
-    userinfoActions: bindActionCreators(userinfoActions, dispatch)
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  login: data => dispatch(login(data)),
+})
 
 export default connect(
   mapStateToProps,

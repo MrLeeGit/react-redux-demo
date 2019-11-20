@@ -3,9 +3,9 @@ import React from 'react';
 
 class C extends React.Component {
   changeUserInfo = () => {
-    const actions = this.props.actions;
+    const { login } = this.props;
 
-    actions.login({
+    login({
       userid: '冀H',
       city: 'chengde'
     });
